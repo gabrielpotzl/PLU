@@ -19,7 +19,9 @@
 <main id="app">
   <header>
     <div id="heard" aria-live="polite">&nbsp;</div>
-    <button id="snd" type="button" aria-label="Felolvasás be/ki">🔊</button>
+    <button id="menuBtn" type="button" aria-label="Menü" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <section id="result">
@@ -28,16 +30,51 @@
     <div id="alts"></div>
   </section>
 
-  <footer>
+  <section id="micZone">
     <button id="mic" type="button" aria-label="Beszéd indítása">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="9" y="2.5" width="6" height="12" rx="3" fill="currentColor"/>
         <path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7"/>
       </svg>
     </button>
-    <input id="q" type="search" placeholder="Vagy írd be a nevét" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  </section>
+
+  <footer>
+    <input id="q" type="search" placeholder="Írd be a termék nevét vagy kódját" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Kereső">
   </footer>
 </main>
+
+<div id="menu" hidden>
+  <div id="scrim"></div>
+  <aside id="panel" role="dialog" aria-modal="true" aria-label="Menü">
+    <div class="phead">
+      <button id="back" type="button" aria-label="Vissza" hidden>‹</button>
+      <h2 id="ptitle">Menü</h2>
+      <button id="close" type="button" aria-label="Bezárás">✕</button>
+    </div>
+
+    <div id="v-main" class="view">
+      <button class="big" data-go="settings" type="button">⚙️ Beállítások</button>
+      <button class="big" data-go="list" type="button">📋 Terméklista</button>
+    </div>
+
+    <div id="v-settings" class="view" hidden>
+      <label class="row"><span>Hangos felolvasás</span><input type="checkbox" id="optSound" role="switch"></label>
+      <label class="row"><span>Számjegyenként olvassa<small>pl. „négy négy négy”</small></span><input type="checkbox" id="optDigits" role="switch"></label>
+      <label class="row col"><span>Hang</span>
+        <select id="optVoice"></select>
+      </label>
+      <button class="big" id="testVoice" type="button">▶︎ Hang kipróbálása</button>
+      <p class="hint">Automatikusan a legjobb minőségű magyar hangot választja. iPhone-on jobb hang: Beállítások → Kisegítő lehetőségek → Felolvasott tartalom → Hangok → Magyar → töltsd le a „Továbbfejlesztett” vagy „Prémium” változatot.</p>
+    </div>
+
+    <div id="v-list" class="view" hidden>
+      <input id="lf" type="search" placeholder="Szűrés a listában" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Szűrés a listában">
+      <div id="plist"></div>
+    </div>
+  </aside>
+</div>
+
 <script src="products.js"></script>
 <script src="app.js"></script>
 </body>
